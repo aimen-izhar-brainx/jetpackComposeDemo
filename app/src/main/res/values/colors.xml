@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="color_black_32">#191632</color>
+    <color name="color_gray_F6">#F6F6F6</color>
+    <color name="color_gray_F6_op_40">#66F6F6F6</color>
+    <color name="color_red_1A">#C1001A</color>
+    <color name="color_gray_65">#656565</color>
+    <color name="color_gray_70">#707070</color>
+    <color name="color_gray_CF">#C4C7CF</color>
+    <color name="black_op_50">#80000000</color>
+    <color name="color_pink_CB_op_40">#66FDE2CB</color>
+    <color name="color_pink_CB">#FDE2CB</color>
+    <color name="color_black_22">#1E2022</color>
+    <color name="color_black_2D">#1A21222D</color>
+    <color name="color_gray_E0_op_23">#23E0E0E0</color>
+    <color name="color_white">#FFFFFF</color>
+    <color name="color_gray_98">#929498</color>
+    <color name="color_black_op_50">#80000000</color>
+    <color name="color_black_2A">#2C2B2A</color>
+    <color name="color_blue_F6">#3478F6</color>
+
+    <color name="colorProgressBg">#99000000</color>
+</resources>

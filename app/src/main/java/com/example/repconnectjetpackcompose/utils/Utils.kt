@@ -1,6 +1,7 @@
 package com.example.repconnectjetpackcompose.utils
 
 import android.content.Context
+import android.content.Intent
 import android.text.format.DateUtils
 import com.example.repconnectjetpackcompose.R
 import java.io.BufferedReader
@@ -49,4 +50,13 @@ object Utils {
             connection.disconnect()
         }
     }
+}
+
+fun shareData(link :String,context: Context) {
+    Intent(Intent.ACTION_SEND).apply {
+        type = "text/plain"
+        putExtra(Intent.EXTRA_TEXT, link)
+        context.startActivity(Intent.createChooser(this, context.getString(R.string.share_podcast)))
+    }
+
 }

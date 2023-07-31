@@ -26,17 +26,20 @@ import com.example.repconnectjetpackcompose.viewModel.RepertoireViewModel
 import com.example.repconnectjetpackcompose.R
 import com.example.repconnectjetpackcompose.bottomNavItems.*
 import com.example.repconnectjetpackcompose.viewModel.ManufacturerViewModel
+import com.example.repconnectjetpackcompose.viewModel.PodcastViewModel
 
 class BottomNavActivity : ComponentActivity() {
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var repertoireViewModel: RepertoireViewModel
     private lateinit var manufacturerViewModel: ManufacturerViewModel
+    private lateinit var podcastViewModel: PodcastViewModel
     private var feedList: ArrayList<HomeItem>? = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         homeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
         repertoireViewModel = ViewModelProvider(this)[RepertoireViewModel::class.java]
         manufacturerViewModel = ViewModelProvider(this)[ManufacturerViewModel::class.java]
+        podcastViewModel = ViewModelProvider(this)[PodcastViewModel::class.java]
         getHomeData()
 
     }
@@ -60,7 +63,7 @@ class BottomNavActivity : ComponentActivity() {
             } else {
                 FeaturedCircularProgressIndicator(state = false)
                 RepConnectJetpackComposeTheme {
-                    MainScreenView(feedList, repertoireViewModel, manufacturerViewModel)
+                    MainScreenView(feedList, repertoireViewModel, manufacturerViewModel,podcastViewModel)
                 }
             }
         }
@@ -74,14 +77,15 @@ fun NavigationGraph(
     navController: NavHostController,
     homeViewModel: List<HomeItem>,
     repertoireViewModel: RepertoireViewModel,
-    manufacturerViewModel: ManufacturerViewModel
+    manufacturerViewModel: ManufacturerViewModel,
+    podcastViewModel: PodcastViewModel,
 ) {
     NavHost(navController, startDestination = BottomNavItem.Home.screen_route) {
         composable(BottomNavItem.Home.screen_route) {
             HomeScreen(homeViewModel)
         }
         composable(BottomNavItem.Podcast.screen_route) {
-            PodcastScreen()
+            PodcastRcv(podcastViewModel)
         }
         composable(BottomNavItem.Repertoire.screen_route) {
             RepertoireScreen(repertoireViewModel)
@@ -147,7 +151,8 @@ fun BottomNavigation(navController: NavController) {
 fun MainScreenView(
     homeViewModel: List<HomeItem>,
     repertoireViewModel: RepertoireViewModel,
-    manufacturerViewModel: ManufacturerViewModel
+    manufacturerViewModel: ManufacturerViewModel,
+    podcastViewModel: PodcastViewModel
 ) {
     val navController = rememberNavController()
     Scaffold(
@@ -158,7 +163,8 @@ fun MainScreenView(
             navController = navController,
             homeViewModel,
             repertoireViewModel,
-            manufacturerViewModel
+            manufacturerViewModel,
+            podcastViewModel
         )
     }
 }

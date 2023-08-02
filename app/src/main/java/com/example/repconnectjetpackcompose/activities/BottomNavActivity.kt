@@ -21,18 +21,16 @@ import androidx.navigation.compose.rememberNavController
 import com.example.repconnectjetpackcompose.models.BottomNavItem
 import com.example.repconnectjetpackcompose.models.HomeItem
 import com.example.repconnectjetpackcompose.ui.theme.RepConnectJetpackComposeTheme
-import com.example.repconnectjetpackcompose.viewModel.HomeViewModel
-import com.example.repconnectjetpackcompose.viewModel.RepertoireViewModel
 import com.example.repconnectjetpackcompose.R
 import com.example.repconnectjetpackcompose.bottomNavItems.*
-import com.example.repconnectjetpackcompose.viewModel.ManufacturerViewModel
-import com.example.repconnectjetpackcompose.viewModel.PodcastViewModel
+import com.example.repconnectjetpackcompose.viewModel.*
 
 class BottomNavActivity : ComponentActivity() {
     private lateinit var homeViewModel: HomeViewModel
     private lateinit var repertoireViewModel: RepertoireViewModel
     private lateinit var manufacturerViewModel: ManufacturerViewModel
     private lateinit var podcastViewModel: PodcastViewModel
+    private lateinit var videoViewModel: VideoViewModel
     private var feedList: ArrayList<HomeItem>? = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +38,8 @@ class BottomNavActivity : ComponentActivity() {
         repertoireViewModel = ViewModelProvider(this)[RepertoireViewModel::class.java]
         manufacturerViewModel = ViewModelProvider(this)[ManufacturerViewModel::class.java]
         podcastViewModel = ViewModelProvider(this)[PodcastViewModel::class.java]
+        videoViewModel = ViewModelProvider(this)[VideoViewModel::class.java]
+
         getHomeData()
 
     }
@@ -63,7 +63,7 @@ class BottomNavActivity : ComponentActivity() {
             } else {
                 FeaturedCircularProgressIndicator(state = false)
                 RepConnectJetpackComposeTheme {
-                    MainScreenView(feedList, repertoireViewModel, manufacturerViewModel,podcastViewModel)
+                    MainScreenView(feedList, repertoireViewModel, manufacturerViewModel,podcastViewModel,videoViewModel)
                 }
             }
         }
@@ -79,6 +79,7 @@ fun NavigationGraph(
     repertoireViewModel: RepertoireViewModel,
     manufacturerViewModel: ManufacturerViewModel,
     podcastViewModel: PodcastViewModel,
+    videoViewModel: VideoViewModel,
 ) {
     NavHost(navController, startDestination = BottomNavItem.Home.screen_route) {
         composable(BottomNavItem.Home.screen_route) {
@@ -94,7 +95,7 @@ fun NavigationGraph(
             ManufacturerRcv(manufacturerViewModel)
         }
         composable(BottomNavItem.Video.screen_route) {
-            VideoView()
+            VideoView(videoViewModel)
         }
     }
 }
@@ -152,7 +153,8 @@ fun MainScreenView(
     homeViewModel: List<HomeItem>,
     repertoireViewModel: RepertoireViewModel,
     manufacturerViewModel: ManufacturerViewModel,
-    podcastViewModel: PodcastViewModel
+    podcastViewModel: PodcastViewModel,
+    videoViewModel: VideoViewModel
 ) {
     val navController = rememberNavController()
     Scaffold(
@@ -164,7 +166,8 @@ fun MainScreenView(
             homeViewModel,
             repertoireViewModel,
             manufacturerViewModel,
-            podcastViewModel
+            podcastViewModel,
+            videoViewModel
         )
     }
 }

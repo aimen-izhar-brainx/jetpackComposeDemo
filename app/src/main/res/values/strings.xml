@@ -90,5 +90,6 @@
     <string name="title_activity_repertiore_fragment">RepertioreFragment</string>
     <string name="title_activity_issue">IssueActivity</string>
     <string name="title_activity_manufacturer">ManufacturerActivity</string>
+    <string name="title_activity_video_player">VideoPlayerActivity</string>
 
 </resources>

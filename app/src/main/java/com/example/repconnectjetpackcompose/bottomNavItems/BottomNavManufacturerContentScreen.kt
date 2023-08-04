@@ -1,7 +1,9 @@
 package com.example.repconnectjetpackcompose.bottomNavItems
 
+import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -14,6 +16,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -23,6 +26,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.repconnectjetpackcompose.R
+import com.example.repconnectjetpackcompose.activities.BottomNavActivity
+import com.example.repconnectjetpackcompose.activities.ManufacturerDetailScreen
 import com.example.repconnectjetpackcompose.models.Manufacturer
 import com.example.repconnectjetpackcompose.viewModel.ManufacturerViewModel
 
@@ -58,6 +63,7 @@ fun ManufacturerRcv(manufacturerViewModel: ManufacturerViewModel) {
 
 @Composable
 fun ManufacturerRcvItem(magList: List<Manufacturer>) {
+    val context = LocalContext.current
     LazyColumn(
         modifier = Modifier
             .padding(0.dp, 0.dp, 0.dp, 56.dp)
@@ -69,7 +75,12 @@ fun ManufacturerRcvItem(magList: List<Manufacturer>) {
                     .padding(24.dp, 0.dp, 24.dp, 10.dp)
             ) {
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth().clickable {
+                        Intent(context, ManufacturerDetailScreen::class.java).apply {
+                            putExtra("manufacturer",it)
+                            context.startActivity(this)
+                        }
+                    },
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     AsyncImage(
